@@ -40,7 +40,7 @@ export default {
 
 <style>
 
-.panel {
+.router-link-active {
     background-color: #00467F;
     max-width: 300px;
     padding-top: 10px;
