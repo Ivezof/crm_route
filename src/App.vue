@@ -16,7 +16,6 @@
 <script>
 import Header from './components/Header.vue';
 import BurgerMenu from './components/BurgerMenu.vue';
-import './js/script.js'
 export default {
   components: {
     Header,
@@ -98,48 +97,6 @@ export default {
 .info__content {
     width: 100%;
     margin-bottom: 125px;
-}
-
-.default__table {
-    border-spacing: 0px;
-    border-collapse: collapse;
-}
-
-.default__table th {
-    background-color: #C7DFF4;
-    white-space: nowrap;
-    cursor: pointer;
-}
-
-.default__table td, .default__table th {
-    color: #000;
-    text-align: center;
-    font-feature-settings: 'clig' off, 'liga' off;
-    font-family: 'Open Sans';
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 18px; /* 112.5% */
-    letter-spacing: 0.16px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 40px;
-    padding-right: 40px;
-    margin-right: 0px;
-}
-
-.default__table tr {
-    border-bottom: 1px solid #E0E0E0;
-}
-
-
-.default__table tr:nth-child(even) {
-    background-color: #E6EDF2;
-}
-
-.filtered::before {
-    content: url('./img/filter.svg');
-    margin-right: 15px;
 }
 
 #chart__profit {

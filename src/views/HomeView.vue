@@ -3,51 +3,30 @@
       <div class="info">
           <p class="default__text profit__text">Прибыль компании за последний год</p>
           <div class="chart">
+            <keep-alive>
               <canvas id="chart__profit"></canvas>
+            </keep-alive>
           </div>
           <p class="default__text last_orders__text">Последние заказы</p>
-          <table class="default__table">
-              <tr>
-                  <th class="filtered">ID заказа</th>
-                  <th>Телефон клиента</th>
-                  <th class="filtered">Сумма, руб.</th>
-                  <th class="filtered">Статус</th>
-              </tr>
-              <tr>
-                  <td>1</td>
-                  <td>+7 (987) 654-32-10</td>
-                  <td>1 299 222</td>
-                  <td>В работе</td>
-              </tr>
-              <tr>
-                  <td>2</td>
-                  <td>+7 (987) 654-32-10</td>
-                  <td>1 299 222</td>
-                  <td>В работе</td>
-                  
-              </tr>
-              <tr>
-                  <td>3</td>
-                  <td>+7 (987) 654-32-10</td>
-                  <td>1 299 222</td>
-                  <td>В работе</td>
-              </tr>
-              <tr>
-                  <td>4</td>
-                  <td>+7 (987) 654-32-10</td>
-                  <td>1 299 222</td>
-                  <td>В работе</td>
-              </tr>
-          </table>
       </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-
-
+import TableComponent from '@/components/TableComponent.vue';
+import { init_chart } from "@/js/modules/chart_profit.js";
+import { getPayments } from "@/js/modules/requests_db.js";
+console.log(12322211);
+window.onload = async () => {
+  
+}
 export default {
-  name: 'HomeView'
+  name: 'HomeView',
+  components: TableComponent,
+  async mounted() {
+    const chart_profit = document.getElementById('chart__profit');
+    init_chart(chart_profit, await getPayments());
+  }
 }
 </script>
