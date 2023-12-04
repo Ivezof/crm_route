@@ -8,7 +8,7 @@
             </keep-alive>
           </div>
           <p class="default__text last_orders__text">Последние заказы</p>
-          <TableCompDynamic typeTable='homeTable' :databases='["id", "phone", "sum", "status"]' :labels='[{"name": "ID Заказа", "filtered": true}, {"name": "Телефон клиента", "filtered": false}, {"name": "Сумма, руб.", "filtered": true}, {"name": "Статус", "filtered": false}]'></TableCompDynamic>
+          <TableCompDynamic :pagination=false typeTable='homeTable' :databases='["id", "phone", "sum", "status"]' :labels='[{"name": "ID Заказа", "filtered": true}, {"name": "Телефон клиента", "filtered": false}, {"name": "Сумма, руб.", "filtered": true}, {"name": "Статус", "filtered": false}]'></TableCompDynamic>
       </div>
   </div>
 </template>

@@ -10,7 +10,7 @@
             <td v-if="delBtns" class="del-btn" @click="deleteElem(el.id)"><img src="../img/delete.svg" alt=""></td>
         </tr>
     </table>
-    <div class="pagination">
+    <div class="pagination" v-if="pagination">
         <div class="item-on-page">
             <p class="pagination-text">Показывать на странице:</p>
             <div class="divider"></div>
@@ -27,11 +27,11 @@
             </select>
             <p class="all-pages-text">из {{ pageLast }} страниц</p>
             <div class="divider"></div>
-            <div class="left__btn pagination__btn" :class="pagesVariant.value == 1 ? 'disabled-btn': ''" @click="pagesVariant.value != 1 ? pagesVariant.value--:''">
+            <div class="left__btn pagination__btn noselect" :class="pagesVariant.value == 1 ? 'disabled-btn': ''" @click="pagesVariant.value != 1 ? pagesVariant.value--:''">
                 <img src="../img/right_arrow.svg" alt="">
             </div>
             <div class="divider"></div>
-            <div class="right__btn pagination__btn" :class="pagesVariant.value == pageLast ? 'disabled-btn': ''" @click="pagesVariant.value != pageLast ? pagesVariant.value++:''">
+            <div class="right__btn pagination__btn noselect" :class="pagesVariant.value == pageLast ? 'disabled-btn': ''" @click="pagesVariant.value != pageLast ? pagesVariant.value++:''">
                 <img src="../img/right_arrow.svg" alt="">
             </div>
         </div>
@@ -54,7 +54,8 @@
                 type: String,
                 default: ''
             },
-            delBtns: Boolean
+            delBtns: Boolean,
+            pagination: Boolean
         },  
         data() {
             return {
@@ -311,5 +312,15 @@
 
 .del-btn {
     cursor: pointer;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }
 </style>
