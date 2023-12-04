@@ -13,7 +13,7 @@
     </div>
   </div>
   <div class="table__center">
-    <TableCompDynamic  :filter="filterValue" typeTable="clientsTable" :databases="['id', 'name', 'totalOrders', 'totalProfit', 'phone']" :labels="[{'name': 'ID Клиента', 'filtered': true}, {'name': 'ФИО', 'filtred': false}, {'name': 'Всего заказов', 'filtered': true}, {'name': 'Прибыль ', 'filtered': true}, {'name': 'Контакты', 'filtered': false}]"></TableCompDynamic>
+    <TableCompDynamic delBtns="true" :filter="filterValue" typeTable="clientsTable" :databases="['id', 'name', 'totalOrders', 'totalProfit', 'phone']" :labels="[{'name': 'ID Клиента', 'filtered': true}, {'name': 'ФИО', 'filtred': false}, {'name': 'Всего заказов', 'filtered': true}, {'name': 'Прибыль ', 'filtered': true}, {'name': 'Контакты', 'filtered': false}]"></TableCompDynamic>
   </div>
   
   <ModalWindow ref="modalTwo" @submitForm="submitForm">

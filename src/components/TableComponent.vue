@@ -2,10 +2,12 @@
     <table class="default__table">
         <tr>
             <th v-for="label in labels" :key="label.name" :class="label.filtered ? 'filtered' : ''">{{ label.name }}</th>
+            <th v-if="delBtns"></th>
         </tr>
         
         <tr v-for="el in dataForTable" :key="el.id">
             <td v-for="db in databases" :key="db">{{ db == 'status' ? statuses[el[db]] : el[db]}}</td>
+            <td v-if="delBtns" class="del-btn" @click="deleteElem(el.id)"><img src="../img/delete.svg" alt=""></td>
         </tr>
     </table>
     <div class="pagination">
@@ -37,7 +39,7 @@
 </template>
 
 <script>
-    import {getOrders, getClient, getClients, getOrdersClient} from "@/js/modules/requests_db"
+    import {getOrders, getClient, getClients, getOrdersClient, deleteElem} from "@/js/modules/requests_db"
     const statuses = {
         1: "В работе",
         2: "Закончено"
@@ -51,7 +53,8 @@
             filter: {
                 type: String,
                 default: ''
-            }
+            },
+            delBtns: Boolean
         },  
         data() {
             return {
@@ -104,6 +107,22 @@
                 console.log(this.itemVariant.value);
                 await this.renderTable();
             }, 
+            async deleteElem(id) {
+                const result = await deleteElem(id, 'clients');
+                console.log(result);
+                if (result) {
+                    this.$notify({
+                        type: 'success',
+                        text: "Клиент удален"
+                    })
+                    this.renderTable();
+                } else {
+                    this.$notify({
+                        type: 'error',
+                        text: "Возникла непредвиденная ошибка"
+                    })
+                }
+            },
             async renderTable() {
                 this.dataForTable = [];
                 switch (this.typeTableInp) {
@@ -288,5 +307,9 @@
 
 .left__btn {
     transform: rotate(180deg);
+}
+
+.del-btn {
+    cursor: pointer;
 }
 </style>

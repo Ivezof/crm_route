@@ -50,4 +50,13 @@ const addClient = async (user) => {
     
 }
 
-export { getPayments, getOrders, getClient, getClients, getOrdersClient, addClient }
+const deleteElem = async (id, dbName) => {
+    const response = await fetch(api_url + `/${dbName}/${id}`, {
+        method: "DELETE",
+    })
+    const result = response.status;
+    console.log(result);
+    return result == 200 ? true: false
+}
+
+export { getPayments, getOrders, getClient, getClients, getOrdersClient, addClient, deleteElem }
