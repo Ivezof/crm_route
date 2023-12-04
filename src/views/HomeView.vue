@@ -8,25 +8,25 @@
             </keep-alive>
           </div>
           <p class="default__text last_orders__text">Последние заказы</p>
+          <TableCompDynamic typeTable='homeTable' :databases='["id", "phone", "sum", "status"]' :labels='[{"name": "ID Заказа", "filtered": true}, {"name": "Телефон клиента", "filtered": false}, {"name": "Сумма, руб.", "filtered": true}, {"name": "Статус", "filtered": false}]'></TableCompDynamic>
       </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import TableComponent from '@/components/TableComponent.vue';
+import TableCompDynamic from '@/components/TableComponent.vue';
 import { init_chart } from "@/js/modules/chart_profit.js";
 import { getPayments } from "@/js/modules/requests_db.js";
-console.log(12322211);
-window.onload = async () => {
-  
-}
+
+TableCompDynamic.databases = [{"id": 1}, {"id": 1}, {"id": 1}]
+
 export default {
   name: 'HomeView',
-  components: TableComponent,
+  components: TableCompDynamic,
   async mounted() {
     const chart_profit = document.getElementById('chart__profit');
-    init_chart(chart_profit, await getPayments());
+    init_chart(chart_profit, await getPayments())
   }
 }
 </script>

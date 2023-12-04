@@ -10,7 +10,7 @@
       </div>
     </div>
   </main>
-  
+  <notifications classes="my-notify" position="bottom right" />
 </template>
 
 <script>
@@ -25,7 +25,7 @@ export default {
 </script>
 
 
-<style>
+<style lang="scss">
 @font-face {
     font-family: 'Crewniverse Font V6';
     src: local('Crewniverse Font V6'),
@@ -74,7 +74,7 @@ export default {
     font-family: 'Inter Medium';
     font-size: 32px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 700;
     line-height: normal;
 }
 
@@ -101,5 +101,36 @@ export default {
 
 #chart__profit {
     width: 1000px;
+}
+
+.header {
+  box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.25);
+}
+
+
+
+.my-notify {
+ /*...*/
+  margin: 0 15px 40px;
+  font-size: 28px;
+  color: #ffffff;
+  padding: 10px;
+  background: #44a4fc;
+  border-left: 5px solid #187fe7;
+
+  &.success {
+    background: #68cd86;
+    border-left-color: #42a85f;
+  }
+
+  &.warn {
+    background: #ffb648;
+    border-left-color: #f48a06;
+  }
+
+  &.error {
+    background: #e54d42;
+    border-left-color: #b82e24;
+  }
 }
 </style>
