@@ -2,15 +2,20 @@ import Chart from 'chart.js/auto';
 import moment from 'moment/moment';
 import 'chartjs-adapter-moment'
 const init_chart = (chart_elem, data) => {
-    console.log(data);
+
+    // Сортировка данных по дате
+
     const data_sorted = Array.from(new Set(data.map(c => c))).sort((d1, d2) => moment(d1.datetime, 'YYYY-MM-DDTHH:mm:ssZZ').diff(moment(d2.datetime, 'YYYY-MM-DDTHH:mm:ssZZ'))).filter((date) => moment(date.datetime, 'YYYY-MM-DDTHH:mm:ssZZ').isBefore(moment().endOf('year'))).filter((date) => moment(date.datetime, 'YYYY-MM-DDTHH:mm:ssZZ').isAfter(moment().startOf('year')));
-    console.log(moment().startOf('year').format("YYYY-MM-DDTHH:mm:ssZZ"));
+    
+    // Создание графика
     new Chart(
         chart_elem, {
+            // Тип графика
             type: 'bar',
             data: { 
                 datasets: [
                     {
+                        // Объявляем столбец в диаграмме и передаем данные
                         label: 'Заработок',
                         data: data_sorted,
                         borderWidth: 1
@@ -19,13 +24,17 @@ const init_chart = (chart_elem, data) => {
             },
             options: {
                 parsing: {
+                    // Указываем какие данные из data_sorted куда вставлять
                     xAxisKey: 'datetime',
                     yAxisKey: 'sum',
                 },
                 scales: {
                     xAxis: {
+
                         beginAtZero: true,
+                        // Указываем что X - это временная шкала
                         type: 'time',
+                        // Получаем максимальное значение - конец текущего года
                         suggestedMax: moment().endOf('year'),
                         time: {
                             parser: false,
@@ -37,8 +46,10 @@ const init_chart = (chart_elem, data) => {
                                 'month': "MMM"
                             }
                         },
+                        // Получаем минимальное значение - начало текущего года
                         min: moment().startOf('year'),
-                        max: '2023-12-30T00:00:00+0000',
+                        // Получаем максимальное значение - конец текущего года
+                        max: moment().endOf('year'),
                         
                     }
                 }

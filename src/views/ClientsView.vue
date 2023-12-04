@@ -15,31 +15,37 @@
   <div class="table__center">
     <TableCompDynamic delBtns="true" :pagination=true :filter="filterValue" typeTable="clientsTable" :databases="['id', 'name', 'totalOrders', 'totalProfit', 'phone']" :labels="[{'name': 'ID Клиента', 'filtered': true}, {'name': 'ФИО', 'filtred': false}, {'name': 'Всего заказов', 'filtered': true}, {'name': 'Прибыль ', 'filtered': true}, {'name': 'Контакты', 'filtered': false}]"></TableCompDynamic>
   </div>
-  
+  <!-- Создание модального окна на странице клиенты -->
   <ModalWindow ref="modalTwo" @submitForm="submitForm">
+    <!-- Перезапись title у модального окна на свое -->
       <template v-slot:title>
           <p class="default__text title-modal__text">Новый клиент</p>
       </template>
+      <!-- Создание своих полей в компоненте модального окна -->
       <template v-slot:body>
           <div class="main-content__popup">
             <p class="popup-title">Информация о клиенте</p>
             <div class="input-popup__block">
               <label for="fio">ФИО клиента</label>
+              <!-- Если ошибка в валидации то добавляется класс error, а уже css отрисовывает ошибку -->
               <input type="text" name="fio" class="popup-input" v-model="fio" v-bind:class="fioError ? 'error': ''">
               <span v-if="fioError" class="error_msg">Неправильно заполненно поле</span>
             </div>
             <div class="input-popup__block">
               <label for="phone">Номер телефона</label>
+              <!-- Если ошибка в валидации то добавляется класс error, а уже css отрисовывает ошибку -->
               <input type="text" name="phone" class="popup-input" v-model="phone" v-bind:class="phoneError ? 'error': ''">
               <span v-if="phoneError" class="error_msg">Неправильно заполненно поле</span>
             </div>
             <div class="input-popup__block">
               <label for="email">Email</label>
+              <!-- Если ошибка в валидации то добавляется класс error, а уже css отрисовывает ошибку -->
               <input type="text" name="email" class="popup-input" v-model="email" v-bind:class="emailError ? 'error': ''">
               <span v-if="emailError" class="error_msg">Неправильно заполненно поле</span>
             </div>
             <div class="input-popup__block">
               <label for="company-name">Название компании</label>
+              <!-- Если ошибка в валидации то добавляется класс error, а уже css отрисовывает ошибку -->
               <input type="text" name="company-name" class="popup-input" v-model="companyName" v-bind:class="companyNameError ? 'error': ''">
               <span v-if="companyNameError" class="error_msg">Неправильно заполненно поле</span>
             </div>
@@ -85,8 +91,12 @@ export default {
     showModal: function() {
       this.$refs.modalTwo.show = true;
     },
+
+    // Функция валидации формы
     submitForm: async function() {
+      // Регулярное выражение для почты
       const email_re = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+      // Регулярное выражение для номера телефона
       const phone_re = /^\+?7[0-9]{10}$/
       if (!email_re.test(this.email)) {
         this.emailError = true;
@@ -110,9 +120,9 @@ export default {
       }
 
       if (!this.fioError && !this.emailError && !this.phoneError && !this.companyNameError) {
-        console.log("send!");
+        // Если все окей, то отправляем запрос на сервер
         const res = await addClient(JSON.stringify({'name': this.fio, 'phone': this.phone, 'email': this.email, 'companyName': this.companyName}));
-        if (res) {
+        if (res) { // Если код 200 или 2** то выводим уведомление о том, что клиент успешно добавлен
           this.$notify({
             type: "success",
             text: "Клиент добавлен!"
